@@ -1,16 +1,22 @@
 package com.lxlol.netty.handler;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lxlol.netty.entity.HeartbeatEntity;
+import com.lxlol.netty.server.NettyServer;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
-import java.util.UUID;
 
 import static com.lxlol.netty.util.ChannelManage.channelGroup;
 
 public class NettyServerHandler extends SimpleChannelInboundHandler<HeartbeatEntity> {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(NettyServer.class);
+
 //public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
 //    @Override
 //    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
@@ -26,6 +32,8 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<HeartbeatEnt
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HeartbeatEntity heartbeatEntity) throws Exception {
+
+        LOGGER.info(JSONObject.toJSONString(heartbeatEntity));
         Channel channel = ctx.channel();
 
         channelGroup.forEach(ch ->{
