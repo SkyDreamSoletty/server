@@ -70,21 +70,4 @@ public class NettyServer {
         LOGGER.info("关闭 Netty 成功");
     }
 
-
-    /**
-     * 发送消息
-     *
-     * @param customProtocol
-     */
-//    public void sendMsg(CustomProtocol customProtocol) {
-//        NioSocketChannel socketChannel = NettySocketHolder.get(customProtocol.getId());
-//
-//        if (null == socketChannel) {
-//            throw new NullPointerException("没有[" + customProtocol.getId() + "]的socketChannel");
-//        }
-//
-//        ChannelFuture future = socketChannel.writeAndFlush(Unpooled.copiedBuffer(customProtocol.toString(), CharsetUtil.UTF_8));
-//        future.addListener((ChannelFutureListener) channelFuture ->
-//                LOGGER.info("服务端手动发消息成功={}", JSON.toJSONString(customProtocol)));
-//    }
 }

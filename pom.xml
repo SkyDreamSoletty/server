@@ -9,6 +9,7 @@
     <modules>
         <module>netty-service</module>
         <module>netty-client</module>
+        <module>common</module>
     </modules>
     <packaging>pom</packaging>
 

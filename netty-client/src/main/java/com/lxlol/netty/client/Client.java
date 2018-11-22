@@ -29,36 +29,11 @@ public class Client {
                 .channel(NioSocketChannel.class)
                 .handler(new MyChatClientInitalizer())
         ;
-
         ChannelFuture future = bootstrap.connect("localhost", 11211).sync();
         if (future.isSuccess()) {
             LOGGER.info("启动 Netty 成功");
         }
         channel = (SocketChannel) future.channel();
     }
-
-//    public static void main(String[] args) throws Exception{
-//        EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
-//        try{
-//            Bootstrap bootstrap = new Bootstrap();
-//            bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
-//                    .handler(new MyChatClientInitalizer());
-//
-////            Channel channel = bootstrap.connect("localhost", 8899).sync().channel();
-//            ChannelFuture future = bootstrap.connect("localhost", 11211).sync();
-//            if (future.isSuccess()) {
-//                SocketChannel socketChannel = (SocketChannel)future.channel();
-//                System.out.println("connect server  成功---------");
-//            }
-////            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-////            while (true){
-////                channel.writeAndFlush("from client:"+ LocalDateTime.now()+"\r\n");
-////                System.out.println("_____");
-////                channel.writeAndFlush(br.readLine()+"\r\n");
-////            }
-//        }finally {
-//            eventLoopGroup.shutdownGracefully();
-//        }
-//    }
 
 }

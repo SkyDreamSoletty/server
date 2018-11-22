@@ -1,17 +1,20 @@
 package com.lxlol.netty.handler;
 
 import com.lxlol.netty.entity.HeartbeatEntity;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
-public class MyChatClientHandler extends SimpleChannelInboundHandler<HeartbeatEntity> {
-//public class MyChatClientHandler extends SimpleChannelInboundHandler<String> {
+public class ClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
-    private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);//netty自带的用来保存channel对象的类
+    private final static Logger LOGGER = LoggerFactory.getLogger(ClientHandler.class);
 
     /**
      * ChannelHandlerContext表示的是上下文 可以获得一些相关的信息，比如连接地址等
@@ -20,8 +23,11 @@ public class MyChatClientHandler extends SimpleChannelInboundHandler<HeartbeatEn
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, HeartbeatEntity msg) throws Exception {
-        System.out.println("服务端返回的数据："+msg);
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+
+        //从服务端收到消息时被调用
+        LOGGER.info("客户端收到消息={}",msg.toString(CharsetUtil.UTF_8)) ;
+
     }
 
 
@@ -38,9 +44,4 @@ public class MyChatClientHandler extends SimpleChannelInboundHandler<HeartbeatEn
         ctx.close();
     }
 
-//    @Override
-//    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-//        System.out.println("服务端返回的数据："+msg);
-//
-//    }
 }

@@ -24,8 +24,9 @@ public class HeartbeatDecoder extends ByteToMessageDecoder {
         String channelId = new String(bytes) ;
 
         HeartbeatEntity heartbeatEntity = new HeartbeatEntity() ;
-        heartbeatEntity.setChannelId(channelId);
         heartbeatEntity.setTimestamp(timestamp);
+        heartbeatEntity.setChannelId(channelId);
         out.add(heartbeatEntity) ;
+
     }
 }
