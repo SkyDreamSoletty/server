@@ -1,14 +1,11 @@
 package com.lxlol.netty.handler;
 
-import com.lxlol.netty.entity.HeartbeatEntity;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.util.CharsetUtil;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Description: 用于检测channel的心跳handler 
@@ -25,6 +22,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 			switch (event.state()){
 				case READER_IDLE:
 					System.out.println("进入读空闲...");
+					ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间："+ LocalDateTime.now()));
 					break;
 				case WRITER_IDLE:
 					System.out.println("进入写空闲...");
